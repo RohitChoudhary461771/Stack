@@ -1,0 +1,124 @@
+🎯  . move s1 element to s2
+    . move data to s1
+    . move s2 element back to s1.
+
+
+------------------------------------------------------------------------------------------------------------
+class MyQueue {
+    private:
+    stack<int>s1;
+    stack<int>s2;
+public:
+    MyQueue() {
+        
+    }
+    
+    void push(int x) {
+        while(!s1.empty()){
+            int a=s1.top();
+            s2.push(a);
+            s1.pop();
+        }
+        s1.push(x);
+        while(!s2.empty()){
+            int b=s2.top();
+            s1.push(b);
+            s2.pop();
+        }
+    }
+    
+    int pop() {
+        if(s1.size()!=0){
+            int a=s1.top();
+            s1.pop();
+            return a;
+        }
+        return -1;
+    }
+    
+    int peek() {
+        if(!s1.empty()){
+            return s1.top();
+        }
+        return -1;
+    }
+    
+    bool empty() {
+        return s1.size()==0?1:0;
+    }
+};
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue* obj = new MyQueue();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->peek();
+ * bool param_4 = obj->empty();
+ */
+
+
+-------------------------------------------------------------------------------------------------------------
+🎯 Look for pop and peek operation
+
+class MyQueue {
+    private:
+        stack<int>input;
+        stack<int>output;
+public:
+    MyQueue() {
+        
+    }
+    
+    void push(int x) {
+        input.push(x);
+    }
+    
+    int pop() {
+        if(!output.empty()){
+            int a=output.top();
+            output.pop();
+            return a;
+        }
+        else {
+            while(!input.empty()){
+                int a=input.top();
+                output.push(a);
+                input.pop();
+            }
+            int b=output.top();
+            output.pop();
+            return b;
+        }
+        
+    }
+    
+    int peek() {
+        if(!output.empty()){
+            return output.top();
+        }
+        else {
+            while(!input.empty()){
+                int a=input.top();
+                output.push(a);
+                input.pop();
+            }
+            return output.top();
+           
+        }
+    }
+    
+    bool empty() {
+       if(output.size()!=0||input.size()!=0)return 0;
+       return 1;
+    }
+};
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue* obj = new MyQueue();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->peek();
+ * bool param_4 = obj->empty();
+ */
